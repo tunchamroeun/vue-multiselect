@@ -507,6 +507,7 @@ export default {
      * @param  {Boolean} block removing
      */
     select (option, key) {
+      console.log(option, key)
       /* istanbul ignore else */
       if (option.$isLabel && this.groupSelect) {
         this.selectGroup(option)
