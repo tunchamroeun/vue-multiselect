@@ -71,6 +71,22 @@ export default {
     }
   },
   props: {
+    // map text and value field
+    field: {
+      type: Object,
+      default () {
+        return {
+          text: null,
+          value: null
+        }
+      }
+      // default () {
+      //   return {
+      //     text: 'text',
+      //     value: 'value'
+      //   }
+      // }
+    },
     /**
      * Decide whether to filter the results based on search query.
      * Useful for async filtering, where we search through more complex data.
@@ -535,12 +551,22 @@ export default {
         }
 
         if (this.multiple) {
-          this.$emit('input', this.internalValue.concat([option]), this.id)
+          if (this.field && this.field.value) {
+            this.$emit('input', this.internalValue.concat([option[this.field.value]], this.id))
+          }
         } else {
-          this.$emit('input', option, this.id)
+          if (this.field && this.field.value) {
+            this.$emit('input', option[this.field.value], this.id)
+          } else {
+            this.$emit('input', option, this.id)
+          }
         }
 
-        this.$emit('select', option, this.id)
+        if (this.field && this.field.value) {
+          this.$emit('select', option[this.field.value], this.id)
+        } else {
+          this.$emit('select', option, this.id)
+        }
 
         /* istanbul ignore else */
         if (this.clearOnSelect) this.search = ''
