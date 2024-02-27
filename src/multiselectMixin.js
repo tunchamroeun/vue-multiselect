@@ -76,16 +76,9 @@ export default {
       type: Object,
       default () {
         return {
-          text: null,
           value: null
         }
       }
-      // default () {
-      //   return {
-      //     text: 'text',
-      //     value: 'value'
-      //   }
-      // }
     },
     /**
      * Decide whether to filter the results based on search query.
