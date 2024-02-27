@@ -350,6 +350,11 @@ export default {
   },
   computed: {
     internalValue () {
+      if (this.field && this.field.value) {
+        return this.value || this.value === 0
+          ? Array.isArray(this.value) ? this.value.map(val => this.options.find(option => option[this.field.value] === val)) : this.options.find(option => option[this.field.value] === this.value)
+          : []
+      }
       return this.value || this.value === 0
         ? Array.isArray(this.value) ? this.value : [this.value]
         : []
